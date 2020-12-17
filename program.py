@@ -80,3 +80,17 @@ def load_test_image(filename):
   return load_image(filename, False)
 
 plt.imshow((load_train_image(randurls[0])[0]))
+#__________________________________________________________________
+#Zona de Carga de datos
+train_dataset = tf.data.Dataset.from_tensor_slices(tr_urls)
+train_dataset = train_dataset.map(load_train_image, num_parallel_calls = tf.data.experimental.AUTOTUNE)
+train_dataset = train_dataset.batch(1)
+
+"""for inimg, tgimg in train_dataset.take(5): Para probar las imagenes
+  plt.imshow(((tgimg[0,...]) + 1) / 2)
+  plt.show()"""
+
+test_dataset = tf.data.Dataset.from_tensor_slices(tr_urls)
+test_dataset = test_dataset.map(load_test_image, num_parallel_calls = tf.data.experimental.AUTOTUNE)
+test_dataset = test_dataset.batch(1)
+#__________________________________________________________________
