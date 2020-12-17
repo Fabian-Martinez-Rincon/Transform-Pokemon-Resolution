@@ -251,9 +251,9 @@ def descriminator_loss(disc_real_output, disc_generated_output):
 
   return total_disc_loss
 
-LAMBDA = 100
+LAMBA = 100
 #Le pasamos ambas imagenes, la imagen generada y la que queremos tener como resultado
-def generator_loss(disc_generated_output, target):
+def generator_loss(disc_generated_output,gen_output, target):
 
   gan_loss = loss_object(tf.ones_like(disc_generated_output),disc_generated_output)
   #mean absolute error :/
@@ -296,17 +296,26 @@ def generate_images(model, test_input, tar, save_filename = False, display_imgs=
 
   plt.show()
 
-def train_step(imput_image, target):
-  with GradientTape() as gen_tape, GradientTape() as discr_tape:
+def train_step(input_image, target):
+  with tf.GradientTape() as gen_tape, tf.GradientTape() as discr_tape:
+
     output_image = generator(input_image, training = True)
+
     output_gen_discr = discriminator([output_image, input_image], training = True)
+
     output_trg_discr = discriminator([target, input_image], training =True)
-    discr_loss = discriminator_loss(output_trg_discr, output_gen_discr)
+
+    discr_loss = descriminator_loss(output_trg_discr, output_gen_discr)
+
     gen_loss = generator_loss(output_gen_discr, output_image, target)
 
-    generator_grads = gen_tape.gradients(gen_loss, generator.trainable_variables)
-    discriminator_grads = discr_tape.gradients(discr_loss, discriminator.trainable_variables)
+
+    generator_grads = gen_tape.gradient(gen_loss, generator.trainable_variables)
+
+    discriminator_grads = discr_tape.gradient(discr_loss, discriminator.trainable_variables)
+
     generator_optimizer.apply_gradients(zip(generator_grads, generator.trainable_variables))
+
     discriminator_optimizer.apply_gradients(zip(discriminator_grads, discriminator.trainable_variables))
 
 from IPython.display import clear_output
@@ -327,3 +336,5 @@ def train(dataset, epochs):
     #Guardo un checkpoint cada 20 procesos
     if (epoch +1) % 25 == 0:
       checkpoint.save(file_prefix=checkpoint_prefix)
+
+train(train_dataset, 100)
