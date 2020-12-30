@@ -2,8 +2,9 @@
 
 # Transform-Pokemon-Resolution
 
-![](Imagenes/descargar.png)
-![Diagrama General](Imagenes/descargar(1).png)
-![](Imagenes/descargar (2).png)
-![](Imagenes/descargar (3).png)
-![](Imagenes/descargar (4).png)
+![](Imagenes/ok1.png)
+![](Imagenes/ok2.png)
+![](Imagenes/ok3.png)
+![](Imagenes/ok4.png)
+![](Imagenes/ok5.png)
+
