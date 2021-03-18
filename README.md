@@ -1,6 +1,9 @@
 [![HitCount](http://hits.dwyl.com/FabianMartinez1234567/Transform-Pokemon-Resolution.svg)](http://hits.dwyl.com/FabianMartinez1234567/Transform-Pokemon-Resolution)
 
 # Transform-Pokemon-Resolution
+
+![](Imagenes/Portada.png) 
+
 | Resultados |
 |--------|
 |           ![](Imagenes/ok1.png)     |
